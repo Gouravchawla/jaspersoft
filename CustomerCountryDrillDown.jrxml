@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2017-04-30T08:26:48 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CustomerCountryDrillDown" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0ba22399-eaf4-4092-898b-907a88822474">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="WindowsLocalhost"/>
+	<property name="ireport.jasperserver.url" value="http://localhost:8080/jasperserver/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin|Tech Deviant"/>
+	<property name="ireport.jasperserver.report.resource" value="/reports/DrillDownReports/CustomerCountryDrillDown_files/main_jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/reports/DrillDownReports/CustomerCountryDrillDown"/>
+	<queryString>
+		<![CDATA[SELECT count(*),
+	classicmodels.customers.country
+FROM classicmodels.customers
+GROUP BY classicmodels.customers.country]]>
+	</queryString>
+	<field name="count(*)" class="java.lang.Long"/>
+	<field name="country" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="79" uuid="88caf642-e905-4f62-ab76-c65437d5fe87"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[Customers by country]]></text>
+			</staticText>
+		</band>
+	</title>
+	<summary>
+		<band height="224" splitType="Stretch">
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="0" y="0" width="555" height="224" uuid="a7d90dc4-88e6-4aa5-a44d-1d027fdec488"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset maxCount="5">
+					<keyExpression><![CDATA[$F{country}]]></keyExpression>
+					<valueExpression><![CDATA[$F{count(*)}]]></valueExpression>
+					<labelExpression><![CDATA[$F{country}+" - "+$F{count(*)}]]></labelExpression>
+					<sectionHyperlink hyperlinkType="ReportExecution">
+						<hyperlinkParameter name="_report">
+							<hyperlinkParameterExpression><![CDATA["/reports/DrillDownReports/CustomersCountrySubReport"]]></hyperlinkParameterExpression>
+						</hyperlinkParameter>
+						<hyperlinkParameter name="country">
+							<hyperlinkParameterExpression><![CDATA[$F{country}]]></hyperlinkParameterExpression>
+						</hyperlinkParameter>
+					</sectionHyperlink>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</summary>
+</jasperReport>

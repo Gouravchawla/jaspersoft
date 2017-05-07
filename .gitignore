@@ -1,0 +1,5 @@
+# Jaspersoft files
+.settings/
+bin
+.classpath
+.project
